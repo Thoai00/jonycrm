@@ -1,26 +1,81 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #0d0616;
+  --foreground: #f5f0e6;
+
+  /* surfaces */
+  --surface-page: #0d0616;
+  --surface-1: #150a24;
+  --surface-2: #1f1030;
+  --surface-3: #2a1640;
+  --border-hairline: rgba(212, 175, 55, 0.16);
+
+  /* ink */
+  --text-primary: #f5f0e6;
+  --text-secondary: #c9bfdb;
+  --text-muted: #8f83a8;
+
+  /* brand gold (chrome: buttons, active states, headings) */
+  --gold-bright: #f4c430;
+  --gold: #d4af37;
+  --gold-deep: #8a6a1a;
+
+  /* validated categorical chart series (dark surface #150a24) */
+  --series-1: #a87d28; /* gold */
+  --series-2: #8b6fe0; /* violet */
+  --series-3: #17a398; /* teal */
+  --series-4: #d1477a; /* rose */
+
+  /* fixed status palette */
+  --status-good: #0ca30c;
+  --status-warning: #fab219;
+  --status-serious: #ec835a;
+  --status-critical: #d03b3b;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-surface-page: var(--surface-page);
+  --color-surface-1: var(--surface-1);
+  --color-surface-2: var(--surface-2);
+  --color-surface-3: var(--surface-3);
+  --color-border-hairline: var(--border-hairline);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+  --color-gold-bright: var(--gold-bright);
+  --color-gold: var(--gold);
+  --color-gold-deep: var(--gold-deep);
+  --color-series-1: var(--series-1);
+  --color-series-2: var(--series-2);
+  --color-series-3: var(--series-3);
+  --color-series-4: var(--series-4);
+  --color-status-good: var(--status-good);
+  --color-status-warning: var(--status-warning);
+  --color-status-serious: var(--status-serious);
+  --color-status-critical: var(--status-critical);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+body {
+  background: var(--surface-page);
+  color: var(--foreground);
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+.bg-casino-glow {
+  background:
+    radial-gradient(60rem 40rem at 15% -10%, rgba(139, 111, 224, 0.18), transparent 60%),
+    radial-gradient(50rem 35rem at 110% 10%, rgba(212, 175, 55, 0.14), transparent 55%),
+    var(--surface-page);
+}
+
+.text-gold-gradient {
+  background: linear-gradient(180deg, var(--gold-bright) 0%, var(--gold) 55%, var(--gold-deep) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
