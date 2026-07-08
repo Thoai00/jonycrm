@@ -4,13 +4,15 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { NAV_ITEMS } from "@/app/dashboard/components/SidebarNav";
+import { NAV_ITEMS, groupBySection } from "@/app/dashboard/components/SidebarNav";
 import { logout } from "@/app/actions/auth";
 
-export function MobileDrawer({ user }: { user: string }) {
+export function MobileDrawer({ user, role, pages }: { user: string; role: string; pages: string[] }) {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
   const [lastPathname, setLastPathname] = useState(pathname);
+  const items = NAV_ITEMS.filter((item) => pages.includes(item.href));
+  const sections = groupBySection(items);
 
   if (pathname !== lastPathname) {
     setLastPathname(pathname);
@@ -63,28 +65,32 @@ export function MobileDrawer({ user }: { user: string }) {
               </button>
             </div>
 
-            <nav className="flex flex-1 flex-col gap-1">
-              <p className="mb-1 px-3 text-[11px] font-semibold uppercase tracking-wider text-text-muted">
-                Menu
-              </p>
-              {NAV_ITEMS.map((item) => {
-                const active = pathname === item.href;
-                const Icon = item.icon;
-                return (
-                  <Link
-                    key={item.label}
-                    href={item.href}
-                    className={`flex items-center gap-2.5 rounded-lg border-l-2 px-2.5 py-2.5 text-sm font-medium transition-colors ${
-                      active
-                        ? "border-gold bg-linear-to-r from-gold/12 to-transparent text-gold-bright"
-                        : "border-transparent text-text-secondary hover:bg-surface-2 hover:text-text-primary"
-                    }`}
-                  >
-                    <Icon className={`h-[18px] w-[18px] shrink-0 ${active ? "text-gold-bright" : "text-text-muted"}`} />
-                    {item.label}
-                  </Link>
-                );
-              })}
+            <nav className="flex flex-1 flex-col gap-4">
+              {sections.map(([section, sectionItems]) => (
+                <div key={section} className="flex flex-col gap-1">
+                  <p className="mb-1 px-3 text-[11px] font-semibold uppercase tracking-wider text-text-muted">
+                    {section}
+                  </p>
+                  {sectionItems.map((item) => {
+                    const active = pathname === item.href;
+                    const Icon = item.icon;
+                    return (
+                      <Link
+                        key={item.label}
+                        href={item.href}
+                        className={`flex items-center gap-2.5 rounded-lg border-l-2 px-2.5 py-2.5 text-sm font-medium transition-colors ${
+                          active
+                            ? "border-gold bg-linear-to-r from-gold/12 to-transparent text-gold-bright"
+                            : "border-transparent text-text-secondary hover:bg-surface-2 hover:text-text-primary"
+                        }`}
+                      >
+                        <Icon className={`h-[18px] w-[18px] shrink-0 ${active ? "text-gold-bright" : "text-text-muted"}`} />
+                        {item.label}
+                      </Link>
+                    );
+                  })}
+                </div>
+              ))}
             </nav>
 
             <div className="mt-6 border-t border-border-hairline pt-4">
@@ -94,7 +100,7 @@ export function MobileDrawer({ user }: { user: string }) {
                 </div>
                 <div className="min-w-0 leading-tight">
                   <p className="truncate text-sm font-medium text-text-primary">{user}</p>
-                  <p className="text-[11px] text-text-muted">Administrator</p>
+                  <p className="text-[11px] text-text-muted">{role}</p>
                 </div>
               </div>
               <form action={logout}>

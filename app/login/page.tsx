@@ -1,12 +1,42 @@
 "use client";
 
 import Image from "next/image";
-import { useActionState, useState } from "react";
-import { login } from "@/app/actions/auth";
+import { useState, useTransition } from "react";
+import { findAccount } from "@/lib/accounts";
+import { getRoleById } from "@/lib/roles";
+import { loginWithRole } from "@/app/actions/auth";
 
 export default function LoginPage() {
-  const [state, formAction, pending] = useActionState(login, undefined);
+  const [error, setError] = useState<string>();
+  const [pending, startTransition] = useTransition();
   const [showPassword, setShowPassword] = useState(false);
+
+  function handleSubmit(formData: FormData) {
+    const username = String(formData.get("username") ?? "").trim();
+    const password = String(formData.get("password") ?? "");
+    const account = findAccount(username, password);
+
+    if (!account) {
+      setError("Invalid username or password.");
+      return;
+    }
+
+    if (!account.isActive) {
+      setError("This account has been deactivated. Contact an admin.");
+      return;
+    }
+
+    const roleDef = getRoleById(account.role);
+    if (!roleDef) {
+      setError("This account's role no longer exists. Contact an admin.");
+      return;
+    }
+
+    setError(undefined);
+    startTransition(async () => {
+      await loginWithRole(account.username, roleDef.name, roleDef.pages, roleDef.canApprove, account.percentage);
+    });
+  }
 
   return (
     <div className="flex min-h-screen flex-1 items-center justify-center bg-casino-glow px-4 py-8 sm:py-16">
@@ -21,7 +51,7 @@ export default function LoginPage() {
           </div>
         </div>
 
-        <form action={formAction} className="flex flex-col gap-4">
+        <form action={handleSubmit} className="flex flex-col gap-4">
           <div className="flex flex-col gap-1.5">
             <label htmlFor="username" className="text-xs font-medium uppercase tracking-wider text-text-secondary">
               Username
@@ -63,9 +93,9 @@ export default function LoginPage() {
             </div>
           </div>
 
-          {state?.error && (
+          {error && (
             <p className="rounded-lg border border-status-critical/30 bg-status-critical/10 px-3 py-2 text-sm text-status-critical">
-              {state.error}
+              {error}
             </p>
           )}
 
@@ -77,6 +107,10 @@ export default function LoginPage() {
             {pending ? "Signing in..." : "Sign in"}
           </button>
         </form>
+
+        <p className="mt-6 text-center text-xs text-text-muted">
+          First time here? Sign in with <span className="text-text-secondary">admin / admin123</span> to create more accounts.
+        </p>
       </div>
     </div>
   );

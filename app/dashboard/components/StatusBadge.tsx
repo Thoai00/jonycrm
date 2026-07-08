@@ -5,6 +5,8 @@ const STATUS_MAP = {
   vip: { label: "VIP", color: "var(--gold-bright)", icon: "★" },
   active: { label: "Active", color: "var(--status-good)", icon: "●" },
   suspended: { label: "Suspended", color: "var(--status-critical)", icon: "■" },
+  verified: { label: "Verified", color: "var(--status-good)", icon: "✓" },
+  rejected: { label: "Rejected", color: "var(--status-critical)", icon: "✕" },
 } as const;
 
 export type StatusKey = keyof typeof STATUS_MAP;

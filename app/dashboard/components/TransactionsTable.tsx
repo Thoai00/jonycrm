@@ -11,14 +11,16 @@ export type Transaction = {
   amount: string;
   status: StatusKey;
   date: string;
+  agent?: string;
 };
 
 type TransactionsTableProps = {
   transactions: Transaction[];
   variant: "cash-in" | "cash-out";
+  canResolve: boolean;
 };
 
-export function TransactionsTable({ transactions, variant }: TransactionsTableProps) {
+export function TransactionsTable({ transactions, variant, canResolve }: TransactionsTableProps) {
   const [rows, setRows] = useState(transactions);
 
   function resolve(id: string, status: "completed" | "failed") {
@@ -27,6 +29,10 @@ export function TransactionsTable({ transactions, variant }: TransactionsTablePr
 
   const refLabel = variant === "cash-in" ? "Transaction ID" : "Account number";
   const refValue = (tx: Transaction) => (variant === "cash-in" ? tx.id : tx.accountNumber);
+
+  if (rows.length === 0) {
+    return <p className="py-6 text-center text-sm text-text-muted">No transactions yet.</p>;
+  }
 
   return (
     <>
@@ -60,7 +66,11 @@ export function TransactionsTable({ transactions, variant }: TransactionsTablePr
 
             {tx.status === "pending" && (
               <div className="mt-3">
-                <ResolveActions onConfirm={() => resolve(tx.id, "completed")} onReject={() => resolve(tx.id, "failed")} />
+                {canResolve ? (
+                  <ResolveActions onConfirm={() => resolve(tx.id, "completed")} onReject={() => resolve(tx.id, "failed")} />
+                ) : (
+                  <span className="text-xs text-text-muted">Awaiting admin approval</span>
+                )}
               </div>
             )}
           </div>
@@ -94,7 +104,11 @@ export function TransactionsTable({ transactions, variant }: TransactionsTablePr
                 <td className="py-2.5 tabular-nums text-text-muted">{tx.date}</td>
                 <td className="py-2.5">
                   {tx.status === "pending" ? (
-                    <ResolveActions onConfirm={() => resolve(tx.id, "completed")} onReject={() => resolve(tx.id, "failed")} />
+                    canResolve ? (
+                      <ResolveActions onConfirm={() => resolve(tx.id, "completed")} onReject={() => resolve(tx.id, "failed")} />
+                    ) : (
+                      <span className="text-xs text-text-muted">Awaiting admin approval</span>
+                    )
                   ) : (
                     <span className="text-xs text-text-muted">—</span>
                   )}

@@ -1,11 +1,19 @@
 import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 import { createHmac, timingSafeEqual } from "crypto";
+import { defaultPathForPages } from "@/lib/roles";
+import { PAGE_CATALOG } from "@/lib/pages";
 
 const COOKIE_NAME = "session";
 const SESSION_DURATION_MS = 7 * 24 * 60 * 60 * 1000;
+const VALID_PAGES = PAGE_CATALOG.map((p) => p.path);
 
 type SessionPayload = {
   user: string;
+  role: string;
+  pages: string[];
+  canApprove: boolean;
+  percentage?: number;
   exp: number;
 };
 
@@ -39,15 +47,24 @@ function decode(token: string): SessionPayload | null {
   try {
     const payload = JSON.parse(Buffer.from(body, "base64url").toString()) as SessionPayload;
     if (typeof payload.exp !== "number" || Date.now() > payload.exp) return null;
+    if (typeof payload.role !== "string" || !payload.role) return null;
+    if (!Array.isArray(payload.pages) || !payload.pages.every((p) => VALID_PAGES.includes(p))) return null;
+    if (typeof payload.canApprove !== "boolean") return null;
     return payload;
   } catch {
     return null;
   }
 }
 
-export async function createSession(user: string) {
+export async function createSession(
+  user: string,
+  role: string,
+  pages: string[],
+  canApprove: boolean,
+  percentage?: number
+) {
   const exp = Date.now() + SESSION_DURATION_MS;
-  const token = encode({ user, exp });
+  const token = encode({ user, role, pages, canApprove, percentage, exp });
   const cookieStore = await cookies();
 
   cookieStore.set(COOKIE_NAME, token, {
@@ -74,4 +91,15 @@ export async function deleteSession() {
 export function verifySessionToken(token: string | undefined) {
   if (!token) return null;
   return decode(token);
+}
+
+export async function requirePage(path: string) {
+  const session = await getSession();
+  if (!session) {
+    redirect("/login");
+  }
+  if (!session.pages.includes(path)) {
+    redirect(defaultPathForPages(session.pages));
+  }
+  return session;
 }

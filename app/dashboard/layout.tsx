@@ -27,7 +27,7 @@ export default async function DashboardLayout({
           </div>
         </div>
 
-        <SidebarNav />
+        <SidebarNav pages={session.pages} />
 
         <div className="mt-6 border-t border-border-hairline pt-4">
           <div className="mb-3 flex items-center gap-2.5 rounded-lg px-2.5 py-2">
@@ -36,7 +36,7 @@ export default async function DashboardLayout({
             </div>
             <div className="min-w-0 leading-tight">
               <p className="truncate text-sm font-medium text-text-primary">{session.user}</p>
-              <p className="text-[11px] text-text-muted">Administrator</p>
+              <p className="text-[11px] text-text-muted">{session.role}</p>
             </div>
           </div>
           <form action={logout}>
@@ -54,7 +54,7 @@ export default async function DashboardLayout({
       <div className="flex min-w-0 flex-1 flex-col">
         <header className="flex items-center justify-between gap-3 px-4 py-4 sm:px-8">
           <div className="flex min-w-0 items-center gap-3">
-            <MobileDrawer user={session.user} />
+            <MobileDrawer user={session.user} role={session.role} pages={session.pages} />
             <PageHeading />
           </div>
           <div className="flex shrink-0 items-center gap-2 sm:gap-3">

@@ -1,0 +1,26 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:3000)",
+      "Bash(curl -s -o /dev/null -w \"root: %{http_code}\\\\n\" http://localhost:3000)",
+      "Bash(curl -s -o /dev/null -w \"dashboard: %{http_code}\\\\n\" -L http://localhost:3000/dashboard)",
+      "Bash(curl -s -o /dev/null -w \"login: %{http_code}\\\\n\" http://localhost:3000/login)",
+      "Bash(tasklist //FI \"IMAGENAME eq node.exe\")",
+      "Bash(git restore *)",
+      "Bash(netstat -ano)",
+      "Bash(taskkill //PID 12824 //F)",
+      "Bash(curl -s -o /dev/null -w \"status: %{http_code}\\\\n\" --max-time 2 http://localhost:3000)",
+      "Bash(node -e ' *)",
+      "Bash(curl -s -o /dev/null -w 'status: %{http_code} -> redirect: %{redirect_url}\\\\n' -H 'Cookie: session=eyJ1c2VyIjoiYWRtaW4iLCJleHAiOjE3ODM0NTc2NzYzNzd9.9trHk668_gT_ZGnTM-P12kk2NNk0AfbzMLIa0Gri1Lo' http://localhost:3000/dashboard)",
+      "Bash(taskkill //PID 2208 //F)",
+      "Bash(node test3.js)",
+      "Bash(taskkill //PID 18204 //F)",
+      "Bash(node test4.js)",
+      "Bash(taskkill //PID 11036 //F)",
+      "Bash(node test5.js)",
+      "Bash(taskkill //PID 17876 //F)",
+      "Bash(node test6.js)",
+      "Bash(taskkill //PID 11664 //F)"
+    ]
+  }
+}

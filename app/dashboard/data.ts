@@ -22,9 +22,9 @@ export const volumeData = [
 ];
 
 export const cashInTransactions: Transaction[] = [
-  { id: "TXN-98213", player: "marcus_v", paymentMethod: "bKash", amount: "$1,250.00", status: "completed", date: "2026-07-04 14:12" },
-  { id: "TXN-98211", player: "kj_highroller", paymentMethod: "Crypto (BTC)", amount: "$5,000.00", status: "completed", date: "2026-07-04 12:58" },
-  { id: "TXN-98209", player: "diceKing", paymentMethod: "Rocket", amount: "$275.50", status: "pending", date: "2026-07-04 10:05" },
+  { id: "TXN-98213", player: "marcus_v", paymentMethod: "bKash", amount: "$1,250.00", status: "completed", date: "2026-07-04 14:12", agent: "agent1" },
+  { id: "TXN-98211", player: "kj_highroller", paymentMethod: "Crypto (BTC)", amount: "$5,000.00", status: "completed", date: "2026-07-04 12:58", agent: "agent1" },
+  { id: "TXN-98209", player: "diceKing", paymentMethod: "Rocket", amount: "$275.50", status: "pending", date: "2026-07-04 10:05", agent: "agent2" },
   { id: "TXN-98207", player: "vegasqueen", paymentMethod: "Visa •••• 7731", amount: "$2,100.00", status: "completed", date: "2026-07-03 20:15" },
   { id: "TXN-98206", player: "rollthe7", paymentMethod: "Crypto (USDT)", amount: "$640.00", status: "failed", date: "2026-07-03 18:52" },
   { id: "TXN-98205", player: "luna88", paymentMethod: "bKash", amount: "$300.00", status: "pending", date: "2026-07-03 16:30" },
@@ -33,12 +33,29 @@ export const cashInTransactions: Transaction[] = [
 ];
 
 export const cashOutTransactions: Transaction[] = [
-  { id: "WD-55201", player: "luna88", paymentMethod: "Nagad", accountNumber: "017••••2201", amount: "$430.00", status: "pending", date: "2026-07-04 13:47" },
+  { id: "WD-55201", player: "luna88", paymentMethod: "Nagad", accountNumber: "017••••2201", amount: "$430.00", status: "pending", date: "2026-07-04 13:47", agent: "agent2" },
   { id: "WD-55200", player: "annab", paymentMethod: "Bank card", accountNumber: "Mastercard •••• 1090", amount: "$120.00", status: "pending", date: "2026-07-04 11:30" },
-  { id: "WD-55199", player: "shadowbet", paymentMethod: "Upay", accountNumber: "018••••3390", amount: "$960.00", status: "pending", date: "2026-07-03 22:41" },
+  { id: "WD-55199", player: "shadowbet", paymentMethod: "Upay", accountNumber: "018••••3390", amount: "$960.00", status: "pending", date: "2026-07-03 22:41", agent: "agent1" },
   { id: "WD-55198", player: "kj_highroller", paymentMethod: "Nagad", accountNumber: "016••••8815", amount: "$8,200.00", status: "completed", date: "2026-07-03 15:02" },
   { id: "WD-55197", player: "marcus_v", paymentMethod: "bKash", accountNumber: "019••••7734", amount: "$610.00", status: "completed", date: "2026-07-03 09:18" },
   { id: "WD-55196", player: "diceKing", paymentMethod: "Crypto (USDT)", accountNumber: "TXn9...4kQe", amount: "$1,340.00", status: "failed", date: "2026-07-02 21:05" },
+];
+
+export const kycSubmissions: Array<{
+  id: string;
+  player: string;
+  documentType: string;
+  submittedDate: string;
+  status: "pending" | "verified" | "rejected";
+  documentImage: string;
+  selfieImage: string;
+}> = [
+  { id: "KYC-3011", player: "diceKing", documentType: "Passport", submittedDate: "2026-07-04 09:12", status: "pending", documentImage: "/file.svg", selfieImage: "/window.svg" },
+  { id: "KYC-3010", player: "luna88", documentType: "Driver's license", submittedDate: "2026-07-03 17:40", status: "pending", documentImage: "/file.svg", selfieImage: "/window.svg" },
+  { id: "KYC-3009", player: "marcus_v", documentType: "National ID", submittedDate: "2026-07-03 11:05", status: "verified", documentImage: "/file.svg", selfieImage: "/window.svg" },
+  { id: "KYC-3008", player: "kj_highroller", documentType: "Passport", submittedDate: "2026-07-02 15:22", status: "verified", documentImage: "/file.svg", selfieImage: "/window.svg" },
+  { id: "KYC-3007", player: "shadowbet", documentType: "National ID", submittedDate: "2026-07-02 08:47", status: "rejected", documentImage: "/file.svg", selfieImage: "/window.svg" },
+  { id: "KYC-3006", player: "rollthe7", documentType: "Driver's license", submittedDate: "2026-07-01 20:10", status: "pending", documentImage: "/file.svg", selfieImage: "/window.svg" },
 ];
 
 export const topPlayers: Array<{
