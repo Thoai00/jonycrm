@@ -20,7 +20,8 @@
       "Bash(node test5.js)",
       "Bash(taskkill //PID 17876 //F)",
       "Bash(node test6.js)",
-      "Bash(taskkill //PID 11664 //F)"
+      "Bash(taskkill //PID 11664 //F)",
+      "Bash(node -e \"console.log\\(require\\('crypto'\\).randomBytes\\(32\\).toString\\('base64'\\)\\)\")"
     ]
   }
 }
