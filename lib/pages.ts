@@ -10,6 +10,7 @@ export const PAGE_CATALOG: PageKey[] = [
   { path: "/dashboard/cash-in", label: "Cash In", section: "Menu" },
   { path: "/dashboard/cash-out", label: "Cash Out", section: "Menu" },
   { path: "/dashboard/my-transactions", label: "My Transactions", section: "Menu" },
+  { path: "/dashboard/message", label: "Message", section: "Menu" },
   { path: "/dashboard/accounts", label: "Account", section: "Menu" },
   { path: "/dashboard/kyc", label: "KYC Verification", section: "Compliance" },
 ];

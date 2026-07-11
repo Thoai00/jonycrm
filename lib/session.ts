@@ -17,12 +17,13 @@ type SessionPayload = {
   exp: number;
 };
 
+// Falls back to a built-in secret so the app still boots on a fresh Vercel
+// deploy with no environment variables configured. Set SESSION_SECRET in the
+// project's environment variables to use a real one instead.
+const FALLBACK_SECRET = "2xlbet-crm-demo-fallback-secret-do-not-use-in-production";
+
 function getSecret() {
-  const secret = process.env.SESSION_SECRET;
-  if (!secret) {
-    throw new Error("SESSION_SECRET environment variable is not set");
-  }
-  return secret;
+  return process.env.SESSION_SECRET || FALLBACK_SECRET;
 }
 
 function sign(value: string) {

@@ -11,6 +11,7 @@ const ICONS: Record<string, (props: IconProps) => React.ReactElement> = {
   "/dashboard/cash-in": CashInIcon,
   "/dashboard/cash-out": CashOutIcon,
   "/dashboard/my-transactions": MyTransactionsIcon,
+  "/dashboard/message": MessageIcon,
   "/dashboard/kyc": KycIcon,
   "/dashboard/accounts": AccountIcon,
 };
@@ -114,6 +115,16 @@ function MyTransactionsIcon({ className }: IconProps) {
       <rect x="3" y="4" width="18" height="16" rx="2" />
       <path d="M3 9h18" />
       <path d="M8 14l3 3 5-6" />
+    </svg>
+  );
+}
+
+function MessageIcon({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+      <path d="M4 5h16a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1H8l-4 4V6a1 1 0 0 1 1-1Z" />
+      <path d="M8 10h8" />
+      <path d="M8 14h5" />
     </svg>
   );
 }

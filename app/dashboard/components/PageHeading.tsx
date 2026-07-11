@@ -7,6 +7,7 @@ const TITLES: Record<string, string> = {
   "/dashboard/cash-in": "Cash In",
   "/dashboard/cash-out": "Cash Out",
   "/dashboard/my-transactions": "My Transactions",
+  "/dashboard/message": "Message",
   "/dashboard/kyc": "KYC Verification",
   "/dashboard/accounts": "Account",
 };

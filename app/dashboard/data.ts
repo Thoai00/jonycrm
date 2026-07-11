@@ -58,6 +58,105 @@ export const kycSubmissions: Array<{
   { id: "KYC-3006", player: "rollthe7", documentType: "Driver's license", submittedDate: "2026-07-01 20:10", status: "pending", documentImage: "/file.svg", selfieImage: "/window.svg" },
 ];
 
+export type ChatMessage = {
+  id: string;
+  from: "agent" | "player";
+  text: string;
+  time: string;
+  // Username of the staff account that sent the message. Only set when from === "agent".
+  agent?: string;
+};
+
+export type Conversation = {
+  id: string;
+  player: string;
+  online: boolean;
+  unread: number;
+  lastMessageTime: string;
+  // Staff account this conversation is assigned to — used to divide the inbox by account.
+  assignedAgent: string;
+  messages: ChatMessage[];
+};
+
+export const conversations: Conversation[] = [
+  {
+    id: "conv-1",
+    player: "kj_highroller",
+    online: true,
+    unread: 2,
+    lastMessageTime: "09:41",
+    assignedAgent: "agent1",
+    messages: [
+      { id: "m1", from: "player", text: "Hey, my withdrawal from yesterday still hasn't landed.", time: "09:12" },
+      { id: "m2", from: "agent", agent: "agent1", text: "Let me check that for you — one moment.", time: "09:14" },
+      { id: "m3", from: "player", text: "Sure, it's WD-55198 for $8,200.", time: "09:15" },
+      { id: "m4", from: "player", text: "Any update?", time: "09:41" },
+    ],
+  },
+  {
+    id: "conv-2",
+    player: "marcus_v",
+    online: true,
+    unread: 0,
+    lastMessageTime: "Yesterday",
+    assignedAgent: "agent1",
+    messages: [
+      { id: "m1", from: "player", text: "Can I get a deposit bonus for this weekend?", time: "Yesterday 18:02" },
+      { id: "m2", from: "agent", agent: "agent1", text: "I've applied a 10% bonus to your next cash-in.", time: "Yesterday 18:10" },
+      { id: "m3", from: "player", text: "Appreciate it, thanks!", time: "Yesterday 18:11" },
+    ],
+  },
+  {
+    id: "conv-3",
+    player: "diceKing",
+    online: false,
+    unread: 1,
+    lastMessageTime: "Yesterday",
+    assignedAgent: "agent2",
+    messages: [
+      { id: "m1", from: "player", text: "My KYC documents got rejected, why?", time: "Yesterday 15:22" },
+      { id: "m2", from: "agent", agent: "agent2", text: "The passport photo was blurry — could you resubmit a clearer scan?", time: "Yesterday 15:30" },
+      { id: "m3", from: "player", text: "Just uploaded a new one, please check.", time: "Yesterday 20:10" },
+    ],
+  },
+  {
+    id: "conv-4",
+    player: "luna88",
+    online: false,
+    unread: 0,
+    lastMessageTime: "Jul 3",
+    assignedAgent: "agent2",
+    messages: [
+      { id: "m1", from: "agent", agent: "agent2", text: "Your cash-in of $300 has been confirmed.", time: "Jul 3 16:31" },
+      { id: "m2", from: "player", text: "Great, thank you!", time: "Jul 3 16:33" },
+    ],
+  },
+  {
+    id: "conv-5",
+    player: "shadowbet",
+    online: false,
+    unread: 0,
+    lastMessageTime: "Jul 2",
+    assignedAgent: "admin",
+    messages: [
+      { id: "m1", from: "player", text: "Why is my account suspended?", time: "Jul 2 19:50" },
+      { id: "m2", from: "agent", agent: "admin", text: "It's flagged for a review by compliance — I've escalated it to KYC.", time: "Jul 2 20:05" },
+    ],
+  },
+  {
+    id: "conv-6",
+    player: "vegasqueen",
+    online: true,
+    unread: 0,
+    lastMessageTime: "Jul 1",
+    assignedAgent: "admin",
+    messages: [
+      { id: "m1", from: "player", text: "Is Rocket available as a cash-in method now?", time: "Jul 1 12:00" },
+      { id: "m2", from: "agent", agent: "admin", text: "Not yet, but it's on the roadmap for next month.", time: "Jul 1 12:04" },
+    ],
+  },
+];
+
 export const topPlayers: Array<{
   name: string;
   email: string;
