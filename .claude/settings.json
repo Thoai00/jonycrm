@@ -21,7 +21,30 @@
       "Bash(taskkill //PID 17876 //F)",
       "Bash(node test6.js)",
       "Bash(taskkill //PID 11664 //F)",
-      "Bash(node -e \"console.log\\(require\\('crypto'\\).randomBytes\\(32\\).toString\\('base64'\\)\\)\")"
+      "Bash(node -e \"console.log\\(require\\('crypto'\\).randomBytes\\(32\\).toString\\('base64'\\)\\)\")",
+      "Bash(break)",
+      "Bash(node \"C:\\\\Users\\\\ASUS\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\f--jony-crm\\\\a4b74c8f-e338-4ca6-b86c-58b274627220\\\\scratchpad\\\\verify.mjs\")",
+      "Bash(npm root *)",
+      "Read(//f//**)",
+      "Bash(node verify.mjs)",
+      "PowerShell(Get-CimInstance Win32_Process | Where-Object { $_.CommandLine -match 'next-server|next dev' } | Select-Object ProcessId, CommandLine)",
+      "PowerShell($conn = Get-NetTCPConnection -LocalPort 3000 -State Listen -ErrorAction SilentlyContinue; if \\($conn\\) { $conn | ForEach-Object { Stop-Process -Id $_.OwningProcess -Force -Confirm:$false; \"Killed PID $\\($_.OwningProcess\\)\" } } else { \"No listener on 3000\" })",
+      "Bash(node verify2.mjs)",
+      "PowerShell($conn = Get-NetTCPConnection -LocalPort 3001 -State Listen -ErrorAction SilentlyContinue; if \\($conn\\) { $conn | ForEach-Object { Stop-Process -Id $_.OwningProcess -Force -Confirm:$false; \"Killed PID $\\($_.OwningProcess\\) on 3001\" } } else { \"No listener on 3001\" })",
+      "PowerShell(Get-NetTCPConnection -LocalPort 3000 -State Listen -ErrorAction SilentlyContinue)",
+      "Bash(node verify3.mjs)",
+      "Bash(node verify4.mjs)",
+      "Bash(node verify5.mjs)",
+      "Bash(curl -s http://localhost:3000/login)",
+      "Bash(curl -s http://localhost:3000/login -o /tmp_page.html)",
+      "Bash(grep -o ':root{[a-zA-Z0-9:;#.,%\\(\\) -]*}')",
+      "Bash(curl -s \"http://localhost:3000/_next/static/chunks/%5Broot-of-the-server%5D__0cbk-n2._.css\")",
+      "PowerShell(Get-CimInstance Win32_Process -Filter \"ProcessId=304\")",
+      "Bash(curl -s -o \"C:\\\\Users\\\\ASUS\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\f--jony-crm\\\\a4b74c8f-e338-4ca6-b86c-58b274627220\\\\scratchpad\\\\style.css\" -w \"%{http_code} %{size_download}\\\\n\" \"http://localhost:3000/_next/static/chunks/%5Broot-of-the-server%5D__0cbk-n2._.css\")",
+      "PowerShell($conn = Get-NetTCPConnection -LocalPort 3000 -State Listen -ErrorAction SilentlyContinue; if \\($conn\\) { $conn | ForEach-Object { Stop-Process -Id $_.OwningProcess -Force -Confirm:$false } }; \"stopped\")",
+      "PowerShell(Get-NetTCPConnection -LocalPort 3000,3001 -State Listen -ErrorAction SilentlyContinue)",
+      "PowerShell(Get-NetTCPConnection -State Listen -ErrorAction SilentlyContinue | Where-Object { $_.LocalPort -ge 3000 -and $_.LocalPort -le 3010 } | Select-Object LocalPort, OwningProcess; Write-Output \"---\"; Get-CimInstance Win32_Process | Where-Object { $_.CommandLine -match 'next-dev|start-server.js|npm run dev' } | Select-Object ProcessId, ParentProcessId, CommandLine)",
+      "PowerShell(Get-CimInstance Win32_Process -Filter \"ProcessId=6400\")"
     ]
   }
 }

@@ -10,6 +10,7 @@ const TITLES: Record<string, string> = {
   "/dashboard/message": "Message",
   "/dashboard/kyc": "KYC Verification",
   "/dashboard/accounts": "Account",
+  "/dashboard/images": "Image",
 };
 
 export function PageHeading() {

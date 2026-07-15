@@ -14,6 +14,7 @@ const ICONS: Record<string, (props: IconProps) => React.ReactElement> = {
   "/dashboard/message": MessageIcon,
   "/dashboard/kyc": KycIcon,
   "/dashboard/accounts": AccountIcon,
+  "/dashboard/images": ImageIcon,
 };
 
 export const NAV_ITEMS = PAGE_CATALOG.map((page) => ({
@@ -146,6 +147,16 @@ function AccountIcon({ className }: IconProps) {
       <path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6" />
       <path d="M18 8v6" />
       <path d="M15 11h6" />
+    </svg>
+  );
+}
+
+function ImageIcon({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+      <rect x="3" y="3" width="18" height="18" rx="2" />
+      <circle cx="8.5" cy="8.5" r="1.75" />
+      <path d="M21 15l-5-5-9 9" />
     </svg>
   );
 }

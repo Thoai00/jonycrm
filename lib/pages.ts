@@ -12,5 +12,6 @@ export const PAGE_CATALOG: PageKey[] = [
   { path: "/dashboard/my-transactions", label: "My Transactions", section: "Menu" },
   { path: "/dashboard/message", label: "Message", section: "Menu" },
   { path: "/dashboard/accounts", label: "Account", section: "Menu" },
+  { path: "/dashboard/images", label: "Image", section: "Menu" },
   { path: "/dashboard/kyc", label: "KYC Verification", section: "Compliance" },
 ];
